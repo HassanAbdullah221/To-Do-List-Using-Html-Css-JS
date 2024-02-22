@@ -1,0 +1,81 @@
+<html>
+<head><title>To do list</title>
+
+<style>
+
+#wrapper {
+  margin:200px auto;
+  max-width:300px;
+  background-color:skyblue;
+  height:400px;
+  padding:20px;
+  border:black 2px solid;
+}
+
+#box1 {
+  max-width:290px;
+  background-color:white;
+  height:350px;
+  padding:5px;
+  margin:5px;
+  border:black 2px solid;
+}
+
+#box2,#wrapper{ 
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+ <div id="wrapper">
+  <label id="l1"><b>To-do List</b></label>
+  <div id="box1">
+    <ul id="taskList"></ul>
+  </div>
+  <div id="box2">
+   <form name="form1" onsubmit="return false;">
+   <input name="text1" id="te1" type="text" placeholder="add task"/>
+   <button id="add">Add </button>
+   <button id="delete">Delete </button>
+   </form> 
+  </div> 
+ </div>
+
+<script>
+
+function start()
+{
+  var b1=document.getElementById("add");
+  b1.addEventListener("click", display,false);
+  var b2=document.getElementById("delete");
+  b2.addEventListener("click", display2,false);
+}
+start();
+
+
+function display() {
+    var taskText = document.getElementById("te1").value;
+    if (taskText.trim() !== "") {
+      var taskList = document.getElementById("taskList");
+      var listItem = document.createElement("li");
+      listItem.innerHTML = '<input type="checkbox">' + taskText;
+      taskList.appendChild(listItem);
+      document.getElementById("te1").value = ""; 
+    }
+  }
+
+function display2() {
+    var taskList = document.getElementById("taskList");
+    var listItems = taskList.getElementsByTagName("li");
+    for (var i = listItems.length - 1; i >= 0; i--) {
+      var checkbox = listItems[i].getElementsByTagName("input")[0];
+      if (checkbox.checked) {
+        taskList.removeChild(listItems[i]);
+      }
+    }
+  }
+   
+</script>
+</body>
+</html>
